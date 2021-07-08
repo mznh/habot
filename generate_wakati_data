@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+cat raw_tweet |nkf |\
+  grep -v "@" |\
+  sed -e "s/http[0-9A-z:\/\.]*//g" |\
+  sed -e "s/^.*ラーメン二郎[^店]*店//g" |\
+  sed -e "s/^.*YEN//g" |\
+  sed -e "s/完飲[^飲]*$/完飲/" |\
+  sed -e "s/\(Apr\|Aug\|Feb\|Jan\|Jul\|Jun\|Mar\|May\|Sep\).*$//" |\
+  sed -e "/^[ 　]*$/d" |\
+  mecab -Owakati > wakati_tweet
+
+
